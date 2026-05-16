@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎬 Galería de Películas y Series
 
-## Getting Started
+Aplicación web construida con Next.js 16 que consume la API de OMDb para mostrar películas y series con una experiencia visual profesional.
 
-First, run the development server:
+## 🚀 Características
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Hero Carousel**: Carrusel automático con películas destacadas (Avengers, Iron Man, Guardians of the Galaxy, etc.)
+- **Películas Populares**: Grid de películas populares con efecto hover
+- **Búsqueda en Tiempo Real**: Búsqueda interactiva con debounce sin recargar la página
+- **Modal de Detalles**: Información completa de cada película/serie (rating, géneros, sinopsis, actores, premios, etc.)
+- **Diseño Responsivo**: Adaptable a todos los dispositivos
+- **SSR + CSR**: Renderizado híbrido para mejor SEO y experiencia de usuario
+
+## 🛠️ Tecnologías
+
+- **Framework**: Next.js 16 (App Router)
+- **Lenguaje**: TypeScript
+- **Estilos**: Tailwind CSS
+- **API**: OMDb API
+- **Despliegue**: Vercel
+
+## 📁 Estructura
+
+```
+app/
+├── movies/
+│   ├── components/
+│   │   ├── HeroCarousel.tsx    # Carrusel de películas destacadas (CSR)
+│   │   ├── MovieCard.tsx       # Tarjeta de película (CSR)
+│   │   ├── MovieModal.tsx      # Modal de detalles (CSR)
+│   │   ├── MovieSearch.tsx     # Búsqueda interactiva (CSR)
+│   │   └── PopularMovies.tsx  # Grid de películas populares (CSR)
+│   ├── page.tsx                # Página principal (SSR)
+│   └── types.ts                # Tipos de TypeScript
+├── layout.tsx
+└── page.tsx                    # Redirección a /movies
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔑 Variables de Entorno
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Crea un archivo `.env.local` con:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```env
+NEXT_PUBLIC_OMDB_API_KEY=tu_api_key
+```
 
-## Learn More
+Obtén tu API key gratuita en: https://www.omdbapi.com/apikey.aspx
 
-To learn more about Next.js, take a look at the following resources:
+## ▶️ Ejecución Local
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Instalar dependencias
+npm install
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Iniciar servidor de desarrollo
+npm run dev
 
-## Deploy on Vercel
+# Construir para producción
+npm run build
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Iniciar en producción
+npm start
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Abre http://localhost:3000/movies
+
+## 📊 Justificación SSR vs CSR
+
+| Componente | Tipo | Razón |
+|------------|------|-------|
+| `page.tsx` | SSR | SEO, LCP, contenido visible inmediatamente |
+| `HeroCarousel` | CSR | Interactividad, cambio de slides |
+| `PopularMovies` | CSR | Click en cards abre modal dinámicamente |
+| `MovieSearch` | CSR | Búsqueda en tiempo real sin reload |
+| `MovieModal` | CSR | Carga detalles bajo demanda |
+
+## 🌐 Despliegue en Vercel
+
+1. Ve a [vercel.com](https://vercel.com)
+2. Importa el repositorio
+3. Agrega la variable de entorno `OMDB_API_KEY`
+4. Deploy automático
+
+## 📄 Licencia
+
+MIT
